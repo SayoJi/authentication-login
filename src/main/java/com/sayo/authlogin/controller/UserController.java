@@ -1,4 +1,4 @@
-package com.sayo.authlogin;
+package com.sayo.authlogin.controller;
 
 import com.sayo.authlogin.domain.User;
 import com.sayo.authlogin.repository.UserRepository;
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,8 +20,12 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping(value = "/user/{userName}")
-    public User getUserByName(@PathVariable("userName") String userName){
+//    @GetMapping(value = "/user/{userName}")
+//    public User getUserByName(@PathVariable("userName") String userName){
+//        return userRepository.findByUserName(userName);
+//    }
+    @GetMapping(value = "/user")
+    public User getUserByName(@RequestParam("userName") String userName){
         return userRepository.findByUserName(userName);
     }
 }

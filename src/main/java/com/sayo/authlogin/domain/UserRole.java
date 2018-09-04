@@ -8,7 +8,7 @@ import java.util.List;
  * 21:47 2018/9/2
  */
 @Entity
-@Table(name = "user_role")
+@Table(name = "sys_role")
 public class UserRole {
 
     private String roleCode;

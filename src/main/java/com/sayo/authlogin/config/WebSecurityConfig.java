@@ -25,6 +25,10 @@ public class WebSecurityConfig {
         @Qualifier("databaseUserDetailService")
         private DatabaseUserDetailService userDetailsService;
 
+        @Autowired
+        @Qualifier("authenticationSuccessHandler")
+        private AuthenticationSuccessHandler successHandler;
+
         @Override
         public void configure(HttpSecurity http) throws Exception {
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
@@ -32,8 +36,10 @@ public class WebSecurityConfig {
                     .authorizeRequests()
                     .antMatchers("/v2/api-docs/**").permitAll()
                     .anyRequest().authenticated()
-                    .and().formLogin().loginProcessingUrl("/api/login");
+                    .and().formLogin().loginProcessingUrl("/api/login")
+                    .successHandler(successHandler);
 //                    .successHandler().failureHandler();
+
 
         }
 

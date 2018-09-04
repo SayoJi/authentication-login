@@ -8,7 +8,7 @@ import java.util.List;
  * 21:45 2018/9/2
  */
 @Entity
-@Table(name = "user")
+@Table(name = "sys_user")
 public class User {
     private String userName;
     private String userDescription;
@@ -44,7 +44,7 @@ public class User {
     }
 
     @ManyToMany
-    @JoinTable(name = "user_user_role",
+    @JoinTable(name = "sys_user_role",
             joinColumns = @JoinColumn(name = "user_name", referencedColumnName = "user_name", updatable = false, insertable = false),
             inverseJoinColumns = @JoinColumn(name = "role_code", referencedColumnName = "role_code", updatable = false, insertable = false))
     public List<UserRole> getRoles() {

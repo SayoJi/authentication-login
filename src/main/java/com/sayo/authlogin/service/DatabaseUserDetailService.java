@@ -25,8 +25,9 @@ public class DatabaseUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(userName);
-        if (user == null){
-            //do something
+        if (user == null) {
+            //throw exception inform front end not this user
+            throw new UsernameNotFoundException("user + " + userName + "not found.");
         }
         List<String> roleCodeList = userRepository.queryUserOwnedRoleCodes(userName);
 
