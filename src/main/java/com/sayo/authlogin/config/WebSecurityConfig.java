@@ -29,6 +29,10 @@ public class WebSecurityConfig {
         @Qualifier("authenticationSuccessHandler")
         private AuthenticationSuccessHandler successHandler;
 
+        @Autowired
+        @Qualifier("authenticationFailHandler")
+        private AuthenticationFailHandler failHandler;
+
         @Override
         public void configure(HttpSecurity http) throws Exception {
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
@@ -37,10 +41,8 @@ public class WebSecurityConfig {
                     .antMatchers("/v2/api-docs/**").permitAll()
                     .anyRequest().authenticated()
                     .and().formLogin().loginProcessingUrl("/api/login")
-                    .successHandler(successHandler);
-//                    .successHandler().failureHandler();
-
-
+                    .successHandler(successHandler)
+                    .failureHandler(failHandler);
         }
 
         @Override
