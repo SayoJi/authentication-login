@@ -25,7 +25,7 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-        response.getWriter().println("{\"exceptionId\":\"null\",\"messageCode\":\"403\"," +
+        response.getWriter().println("{\"exceptionId\":\"null\",\"messageCode\":\"401\"," +
                 "\"message\": \""+ exception.getMessage() + "\",\"serverTime\": " + System.currentTimeMillis() + "}");
     }
 }
