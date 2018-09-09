@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
  *
@@ -33,6 +34,10 @@ public class WebSecurityConfig {
         @Qualifier("authenticationFailHandler")
         private AuthenticationFailHandler failHandler;
 
+        @Autowired
+        @Qualifier("authenticationEntryPointImpl")
+        private AuthenticationEntryPoint entryPoint;
+
         @Override
         public void configure(HttpSecurity http) throws Exception {
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
@@ -42,7 +47,8 @@ public class WebSecurityConfig {
                     .anyRequest().authenticated()
                     .and().formLogin().loginProcessingUrl("/api/login")
                     .successHandler(successHandler)
-                    .failureHandler(failHandler);
+                    .failureHandler(failHandler)
+                    .and().exceptionHandling().authenticationEntryPoint(entryPoint);
         }
 
         @Override

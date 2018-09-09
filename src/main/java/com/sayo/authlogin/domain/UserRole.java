@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Created by Shuangyao
- * 21:47 2018/9/2
+ * Store role information.
  */
 @Entity
 @Table(name = "sys_role")
