@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Created by Shuangyao
- * 21:45 2018/9/2
+ * Store User information.
  */
 @Entity
 @Table(name = "sys_user")
