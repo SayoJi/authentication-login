@@ -1,9 +1,7 @@
 package com.sayo.authlogin.auth;
 
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.UnsupportedJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +26,13 @@ public class JwtTokenProvider {
      */
     public String createJwtToken(Authentication authentication) {
         //user name
-        String userName = ((org.springframework.security.core.userdetails.User) authentication
-                .getPrincipal()).getUsername();
+        String username = ((org.springframework.security.core.userdetails
+                .User) authentication.getPrincipal()).getUsername();
         //expire time
         Date expireTime = new Date(System.currentTimeMillis() + authParameters.getTokenExpiredMs());
-        //create date
+        //create token
         String token = Jwts.builder()
-                .setSubject(userName)
+                .setSubject(username)
                 .setExpiration(expireTime)
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS512, authParameters.getJwtTokenSecret())
@@ -55,7 +53,7 @@ public class JwtTokenProvider {
         try {
             Jwts.parser().setSigningKey(authParameters.getJwtTokenSecret()).parseClaimsJws(token);
             return true;
-        } catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(VALIDATE_FAILED + ex.getMessage());
             return false;
         }

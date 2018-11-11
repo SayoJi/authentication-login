@@ -15,7 +15,7 @@ public class AuthParameters {
         return jwtTokenSecret;
     }
 
-    @Value("jwtTokenSecret")
+    @Value("${jwtTokenSecret}")
     public void setJwtTokenSecret(String jwtTokenSecret) {
         this.jwtTokenSecret = jwtTokenSecret;
     }
@@ -24,7 +24,7 @@ public class AuthParameters {
         return tokenExpiredMs;
     }
 
-    @Value("tokenExpiredMs")
+    @Value("${tokenExpiredMs}")
     public void setTokenExpiredMs(long tokenExpiredMs) {
         this.tokenExpiredMs = tokenExpiredMs;
     }

@@ -3,6 +3,7 @@ package com.sayo.authlogin.controller;
 import com.sayo.authlogin.service.UserService;
 import com.sayo.authlogin.valueobject.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/user")
+    @PreAuthorize("hasAuthority('admin')")
     public UserView getUserByName(@RequestParam("userName") String userName) {
         return userService.getUserByUserName(userName);
     }
